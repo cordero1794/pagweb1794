@@ -26,7 +26,8 @@ def home():
 
         return render_template('home.html', translated_text=translated_text,lang_detected=source_language)
     
-    return render_template('home.html')
+        return render_template('home.html')
+
 # Use the Translator detect function
 path = '/detect'
 url = translator_endpoint + path
