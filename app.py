@@ -2,9 +2,15 @@ from flask import Flask, request, render_template
 import os
 import requests, json
 
-translator_endpoint = 'https://api.cognitive.microsofttranslator.com'
+from flask import Flask
+from flask_migrate import Migrate
 
 app = Flask(__name__)
+migrate = Migrate(app, db)
+
+translator_endpoint = 'https://api.cognitive.microsofttranslator.com'
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
