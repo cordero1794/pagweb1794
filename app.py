@@ -2,47 +2,13 @@ from flask import Flask, request, render_template
 import os
 import requests, json
 
-from flask import Flask
-from flask_migrate import Migrate
-
-app = Flask(__name__)
-migrate = Migrate(app, db)
-
-translator_endpoint = 'https://api.cognitive.microsofttranslator.com'
-
-
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    if request.method == 'POST':
-        text = request.form['text']
-
-        try:
-            cog_key = os.environ.get("COG_SERVICE_KEY")
-            cog_region = os.environ.get("COG_SERVICE_REGION")
-        except Exception as ex:
-            print(ex)
-            return render_template('home.html', translated_text=None, lang_detected=None, error_message="Error en las credenciales del servicio de traducción")
-
-        # Use the Translator detect function
-        detect_path = '/detect'
-        detect_url = translator_endpoint + detect_path
-
-        # Build the request
-        detect_params = {
-            'api-version': '3.0'
-        }
-
-from flask import Flask, request, render_template
-import os
-import requests, json
-
 global translator_endpoint    
 global cog_key    
 global cog_region
 
 try:
-    cog_key = os.environ.get("COG_SERVICE_KEY")
-    cog_region = os.environ.get("COG_SERVICE_REGION")      
+    cog_key = os.environ.get("9340401bdb344538aef521ef7332eeff")
+    cog_region = os.environ.get("eastus")      
     translator_endpoint = 'https://api.cognitive.microsofttranslator.com'   
 except Exception as ex:        
     print(ex)
@@ -62,7 +28,7 @@ def home():
     
     return render_template('home.html')
 
-     # Use the Translator detect function
+
 # Use the Translator translate function
 path = '/translate'
 url = translator_endpoint + path
@@ -90,7 +56,6 @@ response = request.json()
 
 # Parse JSON array and get translation
 translation = response[0]["translations"][0]["text"]
-
 
 
 # Use the Translator detect function
@@ -121,7 +86,6 @@ language = response[0]["language"]
 
 if __name__ == "__main__":
     app.run(debug=True)
-
 
 
 
