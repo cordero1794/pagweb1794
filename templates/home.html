@@ -57,13 +57,14 @@
     <form method="POST">
         <input type="text" name="text" placeholder="Introduce el texto aquí" required>
         <select name="language">
-            <option value="en">Inglés</option>
-            <option value="es">Español</option>
-            <option value="fr">Francés</option>
-            <option value="de">Alemán</option>
+          <option disabled hidden>Selecciona un idioma</option>
+          <option value="en">Inglés</option>
+          <option value="es">Español</option>
+          <option value="fr">Francés</option>
+          <option value="de">Alemán</option>
         </select>
         <input type="submit" value="Traducir">
-    </form>
+      </form>
 
     {% if translated_text %}
     <h2 style="color: #333;">Texto traducido en todos los idiomas:</h2>
