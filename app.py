@@ -83,9 +83,9 @@ def detect_language(text):
 
     response = requests.post(url, params=params, headers=headers, json=body).json()
 
-    languages = response[0]["language"]
+    language = response[0]["language"]
     
-    return languages
+    return language
    
 if __name__ == "__main__":
     app.run(debug=True)
