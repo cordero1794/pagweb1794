@@ -4,33 +4,33 @@
     <title>Traductor</title>
     <style>
         body {
-            background-color: #60867d;
-            font-family: Arial, sans-serif;
+            background-color: #60867d; /* Cambia el color de fondo a tu elección */
+            font-family: Arial, sans-serif; /* Cambia la fuente de las letras a tu elección */
         }
 
         h1 {
-            text-align: center;
+            text-align: center; /* Centra el título */
         }
 
         form {
-            margin: 20px auto;
-            width: 400px;
-            background-color: #529bc5;
+            margin: 20px auto; /* Centra el formulario horizontalmente */
+            width: 400px; /* Cambia el ancho del formulario a tu elección */
+            background-color: #529bc5; /* Cambia el color de fondo del formulario */
             padding: 20px;
             border-radius: 5px;
         }
 
         input[type="text"], select {
-            width: 90%;
+            width: 90%; /* Ajusta el ancho de las casillas al 100% del formulario */
             padding: 10px;
             margin-bottom: 10px;
         }
 
         input[type="submit"] {
-            width: 100%;
+            width: 100%; /* Ajusta el ancho del botón "Traducir" al 100% del formulario */
             padding: 10px;
-            background-color: #a9c4aa;
-            color: #ffffff;
+            background-color: #a9c4aa; /* Cambia el color de fondo del botón "Traducir" */
+            color: #ffffff; /* Cambia el color de las letras del botón "Traducir" */
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -38,14 +38,14 @@
 
         h2 {
             margin-top: 20px;
-            font-size: 18px;
-            text-align: center;
+            font-size: 18px; /* Cambia el tamaño de fuente de los encabezados */
+            text-align: center; /* Centra el texto de los encabezados */
         }
 
         p {
             margin-bottom: 10px;
-            font-size: 16px;
-            text-align: center;
+            font-size: 16px; /* Cambia el tamaño de fuente de los párrafos */
+            text-align: center; /* Centra el texto de los párrafos */
         }
     </style>
 </head>
@@ -54,8 +54,8 @@
     <form method="POST">
         <input type="text" name="text" placeholder="Introduce el texto aquí" required>
         <select name="target_language">
-            <option value="es">Español</option>
             <option value="en">Inglés</option>
+            <option value="es">Español</option>
             <option value="fr">Francés</option>
             <option value="de">Alemán</option>
             <!-- Añade aquí más opciones de idioma según tus necesidades -->
@@ -74,3 +74,4 @@
     {% endif %}
 </body>
 </html>
+
