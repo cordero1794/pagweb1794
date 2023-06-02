@@ -53,21 +53,21 @@
 </style>
 </head>
 <body>
-    <h1>Traductor simple</h1>
+    <h1>Traductor de idiomas</h1>
     <form method="POST">
         <input type="text" name="text" placeholder="Introduce el texto aquí" required>
         <select name="language">
-            <option value="en">Inglés</option>
-            <option value="es">Español</option>
+            <option value="en">ingles,esañol,frances y aleman</option>
+            <!--  <option value="es">Español</option>  
             <option value="fr">Francés</option>
-            <option value="de">Alemán</option>
-            <!-- Añade aquí más opciones de idioma según tus necesidades -->
+            <option value="de">Alemán</option>-->
+           
         </select>
         <input type="submit" value="Traducir">
     </form>
 
     {% if translated_text %}
-    <h2 style="color: #333;">Texto traducido:</h2>
+    <h2 style="color: #333;">Texto traducido en todos los idiomas:</h2>
     <p style="color: #333;">{{translated_text}}</p>
     {% endif %}
 
