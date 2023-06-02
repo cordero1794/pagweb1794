@@ -34,27 +34,33 @@ def translate_text(text, source_language):
     path = '/translate'
     url = translator_endpoint + path
 
-    params = {
-        'api-version': '3.0',
-        'from': source_language,
-        'to': ['en']
-    }
+    target_languages = ['es', 'en', 'fr', 'de']  # Lista de idiomas objetivo
 
-    headers = {
-        'Ocp-Apim-Subscription-Key': cog_key,
-        'Ocp-Apim-Subscription-Region': cog_region,
-        'Content-type': 'application/json'
-    }
+    translations = []
 
-    body = [{
-        'text': text
-    }]
+    for target_language in target_languages:
+        params = {
+            'api-version': '3.0',
+            'from': source_language,
+            'to': [target_language]
+        }
 
-    response = requests.post(url, params=params, headers=headers, json=body).json()
+        headers = {
+            'Ocp-Apim-Subscription-Key': cog_key,
+            'Ocp-Apim-Subscription-Region': cog_region,
+            'Content-type': 'application/json'
+        }
 
-    translation = response[0]["translations"][0]["text"]
+        body = [{
+            'text': text
+        }]
 
-    return translation
+        response = requests.post(url, params=params, headers=headers, json=body).json()
+
+        translation = response[0]["translations"][0]["text"]
+        translations.append(translation)
+
+    return translations
 
 
 def detect_language(text):
