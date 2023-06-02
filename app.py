@@ -11,10 +11,9 @@ try:
     cog_region = os.environ.get("SECRET_REGION")
     translator_endpoint = 'https://api.cognitive.microsofttranslator.com'
 except Exception as ex:
-    print(ex)
+    print(ex  )
 
 app = Flask(__name__)
-
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
