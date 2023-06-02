@@ -41,18 +41,11 @@ def translate_text(text, source_language):
     translations = []
 
     for target_language in target_languages:
-        
         params = {
             'api-version': '3.0',
             'from': source_language,
             'to': [target_language]
         }
-
-
-
-    
-    
-    
 
         headers = {
             'Ocp-Apim-Subscription-Key': cog_key,
