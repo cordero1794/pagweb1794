@@ -19,40 +19,23 @@ app = Flask(__name__)
 def home():
     if request.method == 'POST':
         text = request.form['text']
+        
+        # Use the Translator detect function
         source_language = detect_language(text)
+
+        # Use the Translator translate function
         translated_text = translate_text(text, source_language)
+        
         return render_template('home.html', translated_text=translated_text, lang_detected=source_language)
     
     return render_template('home.html')
 
-def detect_language(text):
-    path = '/detect'
-    url = translator_endpoint + path
-
-    params = {
-        'api-version': '3.0'
-    }
-
-    headers = {
-        'Ocp-Apim-Subscription-Key': cog_key,
-        'Ocp-Apim-Subscription-Region': cog_region,
-        'Content-type': 'application/json'
-    }
-
-    body = [{
-        'text': text
-    }]
-
-    response = requests.post(url, params=params, headers=headers, json=body).json()
-
-    language = response[0]["language"]
-
-    return language
-
+# Use the Translator translate function
 def translate_text(text, source_language):
     path = '/translate'
     url = translator_endpoint + path
 
+    # Build the request
     params = {
         'api-version': '3.0',
         'from': source_language,
@@ -69,11 +52,42 @@ def translate_text(text, source_language):
         'text': text
     }]
 
+    # Send the request and get response
     response = requests.post(url, params=params, headers=headers, json=body).json()
 
+    # Parse JSON array and get translation
     translation = response[0]["translations"][0]["text"]
 
     return translation
+
+
+def detect_language(text):
+    # Use the Translator detect function
+    path = '/detect'
+    url = translator_endpoint + path
+
+    # Build the request
+    params = {
+        'api-version': '3.0'
+    }
+
+    headers = {
+    'Ocp-Apim-Subscription-Key': cog_key,
+    'Ocp-Apim-Subscription-Region': cog_region,
+    'Content-type': 'application/json'
+    }
+
+    body = [{
+        'text': text
+    }]
+
+    # Send the request and get response
+    request = requests.post(url, params=params, headers=headers, json=body)
+    response = request.json()
+
+    # Parse JSON array and get language
+    language = response[0]["language"]
+    return language
 
 if __name__ == "__main__":
     app.run(debug=True)
