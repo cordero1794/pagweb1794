@@ -19,21 +19,40 @@ app = Flask(__name__)
 def home():
     if request.method == 'POST':
         text = request.form['text']
-        # Aquí es donde procesarías el texto. Por ahora, solo devolvemos el mismo texto. 
-        source_language = ''
-
+        source_language = detect_language(text)
         translated_text = translate_text(text, source_language)
-
         return render_template('home.html', translated_text=translated_text, lang_detected=source_language)
     
     return render_template('home.html')
 
-# Use the Translator translate function
+def detect_language(text):
+    path = '/detect'
+    url = translator_endpoint + path
+
+    params = {
+        'api-version': '3.0'
+    }
+
+    headers = {
+        'Ocp-Apim-Subscription-Key': cog_key,
+        'Ocp-Apim-Subscription-Region': cog_region,
+        'Content-type': 'application/json'
+    }
+
+    body = [{
+        'text': text
+    }]
+
+    response = requests.post(url, params=params, headers=headers, json=body).json()
+
+    language = response[0]["language"]
+
+    return language
+
 def translate_text(text, source_language):
     path = '/translate'
     url = translator_endpoint + path
 
-    # Build the request
     params = {
         'api-version': '3.0',
         'from': source_language,
@@ -50,10 +69,8 @@ def translate_text(text, source_language):
         'text': text
     }]
 
-    # Send the request and get response
     response = requests.post(url, params=params, headers=headers, json=body).json()
 
-    # Parse JSON array and get translation
     translation = response[0]["translations"][0]["text"]
 
     return translation
