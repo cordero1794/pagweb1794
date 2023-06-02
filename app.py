@@ -15,6 +15,7 @@ except Exception as ex:
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
@@ -28,7 +29,7 @@ def home():
 
         languages = ['Spanish', 'English', 'French', 'German']  # Lista de nombres de idiomas
 
-        return render_template('home.html', translations=translations, lang_detected=source_language, languages=languages)
+        return render_template('home.html', translated_text=translations, lang_detected=source_language, languages=languages)
 
     return render_template('home.html')
 
