@@ -6,6 +6,7 @@ global translator_endpoint
 global cog_key
 global cog_region
 
+
 try:
     cog_key = os.environ.get("SECRET_KEY")
     cog_region = os.environ.get("SECRET_REGION")
