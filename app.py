@@ -15,52 +15,50 @@ except Exception as ex:
 
 app = Flask(__name__)
 
-
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         text = request.form['text']
+        target_language = request.form['language']
 
         # Use the Translator detect function
         source_language = detect_language(text)
 
         # Use the Translator translate function
-        translations = translate_text(text, source_language)
+        translations = translate_text(text, source_language, target_language)
 
         languages = ['Spanish', 'English', 'French', 'German']  # Lista de nombres de idiomas
 
-        return render_template('home.html', translations, source_language, languages)
+        return render_template('home.html', translations=translations, lang_detected=source_language, languages=languages)
 
     return render_template('home.html')
 
-def translate_text(text, source_language):
+def translate_text(text, source_language, target_language):
     path = '/translate'
     url = translator_endpoint + path
 
-    target_languages = ['es', 'en', 'fr', 'de']  # Lista de idiomas objetivo
+    params = {
+        'api-version': '3.0',
+        'from': source_language,
+        'to': [target_language]
+    }
+
+    headers = {
+        'Ocp-Apim-Subscription-Key': cog_key,
+        'Ocp-Apim-Subscription-Region': cog_region,
+        'Content-type': 'application/json'
+    }
+
+    body = [{
+        'text': text
+    }]
+
+    response = requests.post(url, params=params, headers=headers, json=body).json()
+
     translations = []
-
-    for target_language in target_languages:
-        params = {
-            'api-version': '3.0',
-            'from': source_language,
-            'to': [target_language]
-        }
-
-        headers = {
-            'Ocp-Apim-Subscription-Key': cog_key,
-            'Ocp-Apim-Subscription-Region': cog_region,
-            'Content-type': 'application/json'
-        }
-
-        body = [{
-            'text': text
-        }]
-
-        response = requests.post(url, params=params, headers=headers, json=body).json()
-
-        translation = response[0]["translations"][0]["text"]
-        translations.append(translation)
+    for translation in response:
+        translated_text = translation["translations"][0]["text"]
+        translations.append(translated_text)
 
     return translations
 
@@ -91,6 +89,4 @@ def detect_language(text):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
 
