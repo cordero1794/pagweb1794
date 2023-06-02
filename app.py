@@ -29,7 +29,7 @@ def home():
 
         languages = ['Spanish', 'English', 'French', 'German']  # Lista de nombres de idiomas
 
-        return render_template('home.html', translated_text=translations, lang_detected=source_language, languages=languages)
+        return render_template('home.html', translations, source_language, languages)
 
     return render_template('home.html')
 
