@@ -51,8 +51,7 @@ def translate_text(text, source_language):
     }]
 
     # Send the request and get response
-    request = requests.post(url, params=params, headers=headers, json=body)
-    response = request.json()
+    response = requests.post(url, params=params, headers=headers, json=body).json()
 
     # Parse JSON array and get translation
     translation = response[0]["translations"][0]["text"]
@@ -61,6 +60,7 @@ def translate_text(text, source_language):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
