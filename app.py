@@ -63,6 +63,7 @@ def translate_text(text, source_language):
 
     return translations
 
+
 def detect_language(text):
     path = '/detect'
     url = translator_endpoint + path
@@ -89,4 +90,6 @@ def detect_language(text):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
 
