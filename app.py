@@ -1,3 +1,4 @@
+
 from flask import Flask, request, render_template
 import os
 import requests, json
@@ -88,7 +89,8 @@ def detect_language(text):
     language = response[0]["language"]
     
     return language
-
+    
+    
 if __name__ == "__main__":
     app.run(debug=True)
 
