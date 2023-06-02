@@ -11,7 +11,7 @@ try:
     cog_region = os.environ.get("SECRET_REGION")
     translator_endpoint = 'https://api.cognitive.microsofttranslator.com'
 except Exception as ex:
-    print(ex)
+    print(ex  )
 
 app = Flask(__name__)
 
@@ -24,9 +24,11 @@ def home():
         source_language = detect_language(text)
 
         # Use the Translator translate function
-        translated_text = translate_text(text, source_language)
+        translations = translate_text(text, source_language)
 
-        return render_template('home.html', translated_text=translated_text, lang_detected=source_language)
+        languages = ['Spanish', 'English', 'French', 'German']  # Lista de nombres de idiomas
+
+        return render_template('home.html', translations=translations, lang_detected=source_language, languages=languages)
 
     return render_template('home.html')
 
@@ -35,7 +37,6 @@ def translate_text(text, source_language):
     url = translator_endpoint + path
 
     target_languages = ['es', 'en', 'fr', 'de']  # Lista de idiomas objetivo
-
     translations = []
 
     for target_language in target_languages:
