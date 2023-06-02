@@ -1,4 +1,5 @@
 
+ 
 from flask import Flask, request, render_template
 import os
 import requests, json
@@ -16,7 +17,6 @@ except Exception as ex:
 
 app = Flask(__name__)
 
-
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
@@ -30,7 +30,9 @@ def home():
 
         languages = ['Spanish', 'English', 'French', 'German']  # Lista de nombres de idiomas
 
-        return render_template('home.html', translations, source_language, languages)
+       
+    return render_template('home.html', translations=translations, source_language=source_language, languages=languages)
+
 
     return render_template('home.html')
 
@@ -89,8 +91,7 @@ def detect_language(text):
     language = response[0]["language"]
     
     return language
-    
-    
+   
 if __name__ == "__main__":
     app.run(debug=True)
 
