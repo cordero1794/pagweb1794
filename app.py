@@ -28,7 +28,7 @@ def home():
 
         languages = ['Spanish', 'English', 'French', 'German']  # Lista de nombres de idiomas
 
-        return render_template('home.html', translations,source_language,languages)
+        return render_template('home.html', translations=translations, source_language=source_language, languages=languages)
     return render_template('home.html')
 
 def translate_text(text, source_language):

@@ -18,8 +18,6 @@
             background-color: #529bc5; /* Cambia el color de fondo del formulario */
             padding: 20px;
             border-radius: 5px;
-
-            
         }
     
 
@@ -70,12 +68,12 @@
 
     {% if translated_text %}
     <h2 style="color: #333;">Texto traducido:</h2>
-    <p style="color: #333;">{{translations }}</p>
+    <p style="color: #333;">{{ translations }}</p>
     {% endif %}
 
     {% if lang_detected %}
     <h2 style="color: #333;">Idioma de entrada detectado:</h2>
-    <p style="color: #333;">{{source_language}}</p>
+    <p style="color: #333;">{{ source_language }}</p>
     {% endif %}
 </body>
 </html>
