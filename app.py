@@ -1,21 +1,12 @@
-
- 
 from flask import Flask, request, render_template
 import os
 import requests, json
 
-global translator_endpoint
-global cog_key
-global cog_region
-
-try:
-    cog_key = os.environ.get("SECRET_KEY")
-    cog_region = os.environ.get("SECRET_REGION")
-    translator_endpoint = 'https://api.cognitive.microsofttranslator.com'
-except Exception as ex:
-    print(ex)
-
 app = Flask(__name__)
+
+translator_endpoint = 'https://api.cognitive.microsofttranslator.com'
+cog_key = os.environ.get("SECRET_KEY")
+cog_region = os.environ.get("SECRET_REGION")
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -30,9 +21,7 @@ def home():
 
         languages = ['Spanish', 'English', 'French', 'German']  # Lista de nombres de idiomas
 
-       
-    return render_template('home.html', translations=translations, source_language=source_language, languages=languages)
-
+        return render_template('home.html', translations=translations, lang_detected=source_language, languages=languages)
 
     return render_template('home.html')
 
@@ -67,7 +56,6 @@ def translate_text(text, source_language):
 
     return translations
 
-
 def detect_language(text):
     path = '/detect'
     url = translator_endpoint + path
@@ -89,9 +77,9 @@ def detect_language(text):
     response = requests.post(url, params=params, headers=headers, json=body).json()
 
     language = response[0]["language"]
-    
+
     return language
-   
+
 if __name__ == "__main__":
     app.run(debug=True)
 
