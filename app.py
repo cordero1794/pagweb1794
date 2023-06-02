@@ -24,9 +24,10 @@ def home():
 
         translated_text = translate_text(text, source_language)
 
-        return render_template('home.html', translated_text=translated_text,lang_detected=source_language)
+        return render_template('home.html', translated_text=translated_text, lang_detected=source_language)
     
     return render_template('home.html')
+
 # Use the Translator translate function
 def translate_text(text, source_language):
     path = '/translate'
@@ -55,6 +56,8 @@ def translate_text(text, source_language):
 
     # Parse JSON array and get translation
     translation = response[0]["translations"][0]["text"]
+
+    return translation
 
 if __name__ == "__main__":
     app.run(debug=True)
